@@ -1,0 +1,16 @@
+.addsec{width: 500px;
+    height: 520px;
+    background-color: white;
+    justify-content: center !important;
+    align-items: center !important;
+    margin:30px auto !important;
+    margin-top: 30px;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;}
+    
+    .main3{
+     background:linear-gradient(to right, rgb(0, 0, 0) , rgb(218, 40, 5));
+     min-height: 600px;
+    }
+    .addcontainer{display: flex !important;}

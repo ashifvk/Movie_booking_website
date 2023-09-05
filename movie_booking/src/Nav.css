@@ -1,0 +1,8 @@
+.bg{background:linear-gradient(to right, rgb(0, 0, 0) , rgb(234, 0, 0));}
+
+
+.modleft{text-align: left !important;
+color: white;}
+.modback{background-color: black !important;}
+.modback input {border: white solid;
+background-color: transparent;}

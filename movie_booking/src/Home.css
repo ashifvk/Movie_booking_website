@@ -1,0 +1,78 @@
+.main{min-height: 600px;
+background-color: black;}
+
+.the {
+    min-height: 400px !important;
+    margin-top: 40px !important;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.the img {
+    border: 2px solid rgb(251, 27, 6);
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.layer {
+    width: 100%;
+    height: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgb(244, 5, 5));
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    text-align: center;
+    flex-direction: column;
+    font-size: 14px;
+    transition: height 0.5s;
+}
+
+.layer a {
+    color: rgb(238, 15, 15);
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 60px;
+    background: white;
+    width: 90px;
+    height: 60px;
+    border-radius: 10%;
+    text-align: center;
+}
+
+.the:hover img {
+    transform: scale(1.1);
+}
+
+.the:hover .layer {
+    height: 100%;
+}
+
+
+.leo,
+.kgf,
+.jailer {
+    min-height: 400px;
+}
+
+@media(max-width:770px) {
+    .yy {
+        width: 250px;
+    }
+}
+
+@media(max-width:1198px) {
+    .last {
+        margin-top: 10px;
+    }
+}
+

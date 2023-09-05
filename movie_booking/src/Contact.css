@@ -1,0 +1,42 @@
+* contact section */
+ h2{margin-top: 3rem;}
+ form{
+    max-width: 40rem;
+    margin: 0 auto;
+    text-align: center;
+    
+}
+ form .input-box{display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
+ form .input-box input,textarea{border: 2px solid white}
+ form textarea:hover{border: 2px solid rgb(232, 3, 3)}
+ form .input-box input:hover{border: 2px solid rgb(232, 3, 3)}
+
+
+ form .input-box input, form textarea{
+width: 100%;
+padding: .2rem;
+font-size: 1.3rem;
+color: #ffffff;
+background:transparent;
+border-radius:9px;
+margin: .7rem 0;}
+ form .input-box input{width: 49%;}
+form textarea{resize: none;}
+form .input-box input.btn{
+ margin: .5rem auto;
+cursor: pointer;
+background: transparent;
+border-radius: 5px;
+font-size: 1.5rem;
+font-weight: 400;
+width: 120px;
+color:white;
+}
+form .input-box input.btn:hover{background:linear-gradient(to right, rgb(0, 0, 0) , rgb(234, 0, 0));
+border: solid white;}
+span{color: red;}
+
+.bg2{background-color: black;}
