@@ -5,8 +5,10 @@ import axios from 'axios';
 
 export default function Edit() {
     const nav = useNavigate()
+
     const { showid } = useParams()
     console.log(showid);
+
     const [state, setState] = useState()
     const [get, setGet] = useState({})
 
@@ -21,6 +23,9 @@ export default function Edit() {
             nav('/show')
         }).catch((error)=>{console.log(error);})
 
+    }
+    const back = ()=>{
+        nav('/show')
     }
 
 
@@ -70,8 +75,9 @@ export default function Edit() {
                             </div>
                         </div>
 
-
-                        <input type="button" value='submit' class="b" onClick={update}></input>
+                        <input type="button" value='Back' class="b" onClick={back}></input>
+                        <input type="button" value='submit' class="b ml-2" onClick={update}></input>
+                       
                     </form>
                 </div>
             </div>

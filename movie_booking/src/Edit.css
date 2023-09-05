@@ -14,3 +14,10 @@
      min-height: 600px;
     }
     .addcontainer{display: flex !important;}
+
+    .b{
+        background-color: red;
+        border-radius: 5px;
+        border-color: transparent;
+        color: white;
+    }
