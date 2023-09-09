@@ -9,6 +9,7 @@ import Users from './Users';
 import Addshows from './Addshows';
 import Show from './Show';
 import Edit from './Edit';
+import ContactusView from './ContactusView';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
     <Route path='/addshow' element={<Addshows/>}/>
     <Route path='/show' element={<Show/>}/>
     <Route path='/edit/:showid' element={<Edit/>}/>
+    <Route path='/contactusView' element={<ContactusView/>}/>
+
   </Routes>
   </BrowserRouter>
   );

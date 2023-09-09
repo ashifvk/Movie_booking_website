@@ -1,4 +1,4 @@
-from .models import login,register,show
+from .models import login,register,show,contactus
 from rest_framework import serializers
 
 
@@ -15,4 +15,9 @@ class registerserializers(serializers.ModelSerializer):
 class showserializers(serializers.ModelSerializer):
     class Meta:
         model=show
+        fields='__all__'
+
+class contactserializers(serializers.ModelSerializer):
+    class Meta:
+        model=contactus
         fields='__all__'

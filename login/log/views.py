@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import loginserializers,registerserializers,showserializers
-from .models import login,register,show
+from .serializers import loginserializers,registerserializers,showserializers,contactserializers
+from .models import login,register,show,contactus
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -69,12 +69,13 @@ class LoginUserAPIView(GenericAPIView):
 class AddshowAPI(GenericAPIView):
     serializer_class=showserializers
     def post(self,request):
+        image=request.data.get('image')
         filmName=request.data.get('filmName')
         directorName=request.data.get('directorName')
         star=request.data.get('star')
         rating=request.data.get('rating')
         releaseDate=request.data.get('date')
-        serializer_show=self.serializer_class(data={'filmName':filmName,'directorName':directorName,'star':star,'rating':rating,'releaseDate':releaseDate,})
+        serializer_show=self.serializer_class(data={'filmName':filmName,'directorName':directorName,'star':star,'rating':rating,'releaseDate':releaseDate,'image':image})
         print(serializer_show)
         if(serializer_show.is_valid()):
             serializer_show.save()
@@ -117,6 +118,36 @@ class getsingleShow(GenericAPIView):
             serializer=showserializers(queryset,many=True)
             return Response({'data':serializer.data,'message':'get  show data','success':True},status=status.HTTP_200_OK)
         return Response({'data':[],'message':'no data ','success':False},status=status.HTTP_400_BAD_REQUEST)
+    
+class contactusAPI(GenericAPIView):
+    serializer_class=contactserializers
+    def post(self,request):
+        fname=request.data.get('fname')
+        lname=request.data.get('lname')
+        email=request.data.get('email')
+        number=request.data.get('number')
+        message=request.data.get('message')
+        serializer_contact=self.serializer_class(data={'fname':fname,'lname':lname,'email':email,'number':number,'message':message,})
+        print(serializer_contact)
+        if(serializer_contact.is_valid()):
+            serializer_contact.save()
+            return Response({'data':serializer_contact.data,'message':'Added successfully','success':True},status=status.HTTP_201_CREATED)
+        return Response({'data':serializer_contact.errors,'message':'failed','success':False},status=status.HTTP_400_BAD_REQUEST)
+
+class GetContactusDetails(GenericAPIView):
+    serializer_class=contactserializers
+    def get(self,request):
+        queryset=contactus.objects.all()
+        if(queryset.count()>0):
+            serializer=contactserializers(queryset,many=True)
+            return Response({'data':serializer.data,'message':'all show set','success':True},status=status.HTTP_200_OK)
 
 
-
+class getsinglecontactView(GenericAPIView):
+    serializer_class=contactserializers
+    def get(self,request,id):
+        queryset=contactus.objects.filter(pk=id).values()
+        if(queryset.count()>0):
+            serializer=contactserializers(queryset,many=True)
+            return Response({'data':serializer.data,'message':'get  show data','success':True},status=status.HTTP_200_OK)
+        return Response({'data':[],'message':'no data ','success':False},status=status.HTTP_400_BAD_REQUEST)

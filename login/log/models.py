@@ -12,7 +12,15 @@ class register(models.Model):
   
 class show(models.Model):
     filmName=models.CharField(max_length=30)
+    image=models.ImageField(upload_to='images/',null=True)
     star=models.CharField(max_length=30)
     releaseDate=models.CharField(max_length=30)
     rating=models.CharField(max_length=30)
     directorName=models.CharField(max_length=30)
+
+class contactus(models.Model):
+    fname=models.CharField(max_length=30)
+    lname=models.CharField(max_length=30)
+    email=models.CharField(max_length=30)
+    number=models.CharField(max_length=30)
+    message=models.CharField(max_length=30)

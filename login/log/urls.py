@@ -10,8 +10,11 @@ urlpatterns = [
     path('deleteshow/<int:id>',views.deleteshow.as_view(),name='deleteshow'),
     path('updateshow/<int:id>',views.updateshow.as_view(),name='updateshow'),
     path('getsingleShow/<int:id>',views.getsingleShow.as_view(),name='getsingleShow'),
+    path('contactusAPI',views.contactusAPI.as_view(),name='contactusAPI'),
+    path('GetContactusDetails',views.GetContactusDetails.as_view(),name='GetContactusDetails'),
+    path('getsinglecontactView/<int:id>',views.getsinglecontactView.as_view(),name='getsinglecontactView'),
 
-    
+
 
 
     

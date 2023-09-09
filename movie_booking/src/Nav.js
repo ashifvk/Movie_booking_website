@@ -102,7 +102,7 @@ export default function Nav() {
               <a class="nav-link active text-white" href="/">Home <span class="sr-only">(current)</span></a>
               <a class="nav-link text-white" href="/addshow">Add shows</a>
               <a class="nav-link text-white" href="/show">Shows</a>
-              <a class="nav-link text-white" href="/contact">Contact us</a>
+              <a class="nav-link text-white" href="/contactusView">ContactusView</a>
               <a class="nav-link text-white" href="/users">Users</a>
             </div>
             <button type="button" class="btn btn-light" data-toggle="modal" onClick={clr}>
