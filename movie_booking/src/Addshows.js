@@ -16,13 +16,28 @@ export default function Addshows() {
     }
     const submit = ()=>{
         console.log(state);
+        const data = new FormData()
+        data.append('filmImage',state.filmImage)
+        data.append('filmName',state.filmName)
+        data.append('star',state.star)
+        data.append('date',state.date)
+        data.append('directorName',state.directorName)
+        data.append('rating',state.rating)
         axios.post('http://127.0.0.1:8000/api/AddshowAPI',state).then((response)=>{
 console.log(response);
 
 navigate('/show')
 
-        })
+        }).catch((error)=>{console.log(error);})
     }
+
+
+    const imageGet = (event)=>{
+         const {filmImage} = event.target.files[0]
+         setState({...state,'filmImage':filmImage})
+    }
+
+
   return (
     <>
     <Nav/>
@@ -31,6 +46,11 @@ navigate('/show')
       <div class="container addcontainer">
         <div class="row mt-3 addsec">
             <form action="">
+
+            <div class="form-group">
+                    <label>FilmImage</label>
+                    <input type="file" class="form-control"  name="filmImage" onChange={imageGet}></input>
+                </div>
 
                 <div class="form-group">
                     <label>FilmName</label>

@@ -4,9 +4,9 @@ import Nav from './Nav'
 import axios from 'axios'
 
 export default function ContactusView() {
-
+    
     const [state, setState] = useState([])
-    const [input, setInput] = useState([])
+    const [input, setInput] = useState({})
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/GetContactusDetails').then((response) => {
             console.log(response);
@@ -22,6 +22,14 @@ export default function ContactusView() {
             setInput(response.data.data[0])
         })
 
+    }
+    const send = () => {
+        axios.post('http://127.0.0.1:8000/api/replyMessage',input).then((error)=>{console.log(error.data);})
+        console.log(input);
+    }
+    const inputChange = (event) => {
+        const { name, value } = event.target
+        setInput({ ...input, [name]: value })
     }
 
 
@@ -73,23 +81,23 @@ export default function ContactusView() {
                         </div>
                         <div class="modal-body">
                             <form>
-                            <div class="form-group">
+                                <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Name:</label>
-                                    <input type="text" class="form-control" id="recipient-name" value={input.fname}></input>
+                                    <input type="text" class="form-control" id="recipient-name" name='replyname' value={input.fname}></input>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                    <input type="text" class="form-control" id="recipient-name" value={input.email}></input>
+                                    <input type="text" class="form-control" id="recipient-name" name='email' value={input.email}></input>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Message:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                                    <label for="message-text" class="col-form-label" >Message:</label>
+                                    <textarea class="form-control" id="message-text" name='Reply' onChange={inputChange}></textarea>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="button" class="btn btn-primary" onClick={send}>Send message</button>
                         </div>
                     </div>
                 </div>

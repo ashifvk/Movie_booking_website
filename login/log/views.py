@@ -4,7 +4,7 @@ from .models import login,register,show,contactus
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
-
+from .mail import sendmail
 class registerApi(GenericAPIView):
 
     serializer_class=loginserializers
@@ -69,7 +69,7 @@ class LoginUserAPIView(GenericAPIView):
 class AddshowAPI(GenericAPIView):
     serializer_class=showserializers
     def post(self,request):
-        image=request.data.get('image')
+        image=request.data.get('filmImage')
         filmName=request.data.get('filmName')
         directorName=request.data.get('directorName')
         star=request.data.get('star')
@@ -145,9 +145,21 @@ class GetContactusDetails(GenericAPIView):
 
 class getsinglecontactView(GenericAPIView):
     serializer_class=contactserializers
-    def get(self,request,id):
+    def get(self,request,id):   
         queryset=contactus.objects.filter(pk=id).values()
         if(queryset.count()>0):
             serializer=contactserializers(queryset,many=True)
             return Response({'data':serializer.data,'message':'get  show data','success':True},status=status.HTTP_200_OK)
         return Response({'data':[],'message':'no data ','success':False},status=status.HTTP_400_BAD_REQUEST)
+    
+
+class replyMessage(GenericAPIView):
+    def post(self,reguest):
+        message=reguest.data.get('Reply')
+        to_email=reguest.data.get('email')
+       
+        sendmail(to_email,message)
+        return Response({'reply':message,'to_email':to_email, 'message':'success','success':True},status=status.HTTP_201_CREATED)
+
+        
+    

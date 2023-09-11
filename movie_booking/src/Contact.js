@@ -66,6 +66,7 @@ console.log(state);
       <input type="number" placeholder="Phone Number" name='number' onChange={inputchange}></input>
       <textarea placeholder="Your Message" cols="30" rows="8" name='message' onChange={inputchange}></textarea>
       <input type="button" value="Send " class="btn" onClick={submit}></input>
+      {/* <input type="button" value="Back " href='/' class="btn" ></input> */}
     </div>
   </form>
 </div>
