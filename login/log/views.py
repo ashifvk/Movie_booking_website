@@ -157,7 +157,6 @@ class replyMessage(GenericAPIView):
     def post(self,reguest):
         message=reguest.data.get('Reply')
         to_email=reguest.data.get('email')
-       
         sendmail(to_email,message)
         return Response({'reply':message,'to_email':to_email, 'message':'success','success':True},status=status.HTTP_201_CREATED)
 

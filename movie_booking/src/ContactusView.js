@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './ContactusView.css'
 import Nav from './Nav'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ContactusView() {
-    
+    const set = localStorage.getItem('reply')
+
     const [state, setState] = useState([])
     const [input, setInput] = useState({})
     useEffect(() => {
@@ -24,8 +26,25 @@ export default function ContactusView() {
 
     }
     const send = () => {
-        axios.post('http://127.0.0.1:8000/api/replyMessage',input).then((error)=>{console.log(error.data);})
+        axios.post('http://127.0.0.1:8000/api/replyMessage', input).then((response) => { console.log(response.data); })
         console.log(input);
+        toast.success('success', {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        localStorage.setItem('reply',('replied'))
+      
+        setInterval(fun, 900)
+        function fun() {
+            window.location.reload()
+        }
+
     }
     const inputChange = (event) => {
         const { name, value } = event.target
@@ -36,6 +55,7 @@ export default function ContactusView() {
     return (
         <div className='main4'>
             <Nav />
+            <ToastContainer />
             <div class="container">
                 <div class="row">
                     {state[0] ?
@@ -51,6 +71,12 @@ export default function ContactusView() {
                                             <p class="card-text">Message : {value.message}</p>
 
                                             <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onClick={() => { reply(value.id) }}>Reply</a>
+                                            {set == "replied" ?
+                                                <a class="btn btn-primary">Replied</a>
+
+                                                :
+                                                <none />
+                                            }
                                         </div>
                                     </div>
                                 </div>

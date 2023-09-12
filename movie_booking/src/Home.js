@@ -8,6 +8,9 @@ import './Home.css'
 import Contact from './Contact'
 
 export default function Home() {
+
+  const role = localStorage.getItem('login')
+  console.log(role);
   return (
     <div className='main'>
      <Nav/>
@@ -91,8 +94,14 @@ export default function Home() {
 </div>
 </div>
 </div>
-
+{role=='admin'?
+<none/>
+:
 <Contact/>
+
+}
+
+
     </div>
   )
 }
