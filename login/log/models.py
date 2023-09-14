@@ -24,3 +24,5 @@ class contactus(models.Model):
     email=models.CharField(max_length=30)
     number=models.CharField(max_length=30)
     message=models.CharField(max_length=30)
+    status=models.CharField(max_length=30)
+    reply=models.CharField(max_length=30,blank=True,default="no reply")

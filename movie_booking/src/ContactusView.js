@@ -5,7 +5,6 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function ContactusView() {
-    const set = localStorage.getItem('reply')
 
     const [state, setState] = useState([])
     const [input, setInput] = useState({})
@@ -13,6 +12,7 @@ export default function ContactusView() {
         axios.get('http://127.0.0.1:8000/api/GetContactusDetails').then((response) => {
             console.log(response);
             setState(response.data.data)
+
         }).catch((error) => { console.log(error); })
     }, []);
 
@@ -22,12 +22,16 @@ export default function ContactusView() {
         axios.get(`http://127.0.0.1:8000/api/getsinglecontactView/${id}`).then((response) => {
             console.log(response.data.data[0]);
             setInput(response.data.data[0])
+
         })
 
     }
-    const send = () => {
-        axios.post('http://127.0.0.1:8000/api/replyMessage', input).then((response) => { console.log(response.data); })
-        console.log(input);
+    const send = (val) => {
+        const id = val
+        axios.post(`http://127.0.0.1:8000/api/replyMessage/${id}`,input).then((response) => { 
+            console.log(response.data.data);
+            window.location.reload()
+         }).catch((error)=>{console.log(error);})
         toast.success('success', {
             position: "top-center",
             autoClose: 4000,
@@ -38,19 +42,13 @@ export default function ContactusView() {
             progress: undefined,
             theme: "light",
         });
-        localStorage.setItem('reply',('replied'))
-      
-        setInterval(fun, 900)
-        function fun() {
-            window.location.reload()
-        }
 
     }
+
     const inputChange = (event) => {
         const { name, value } = event.target
         setInput({ ...input, [name]: value })
     }
-
 
     return (
         <div className='main4'>
@@ -69,13 +67,16 @@ export default function ContactusView() {
                                             <h6 class="card-text">Email :{value.email}</h6>
                                             <p class="card-text dai2">Contact :{value.number}</p>
                                             <p class="card-text">Message : {value.message}</p>
+                                            {/* <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onClick={() => { reply(value.id) }}>Reply</a> */}
 
-                                            <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onClick={() => { reply(value.id) }}>Reply</a>
-                                            {set == "replied" ?
-                                                <a class="btn btn-primary">Replied</a>
+
+                                            {value.status == "1" ?
+                                                <a class="btn btn-success">Replied</a>
 
                                                 :
-                                                <none />
+                                                <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onClick={() => { reply(value.id) }}>Reply</a>
+
+                                            
                                             }
                                         </div>
                                     </div>
@@ -123,7 +124,7 @@ export default function ContactusView() {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onClick={send}>Send message</button>
+                            <button type="button" class="btn btn-primary" onClick={()=>{send(input.id)}}>Send message</button>
                         </div>
                     </div>
                 </div>

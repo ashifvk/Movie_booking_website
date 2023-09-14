@@ -122,12 +122,13 @@ class getsingleShow(GenericAPIView):
 class contactusAPI(GenericAPIView):
     serializer_class=contactserializers
     def post(self,request):
+        progress='0'
         fname=request.data.get('fname')
         lname=request.data.get('lname')
         email=request.data.get('email')
         number=request.data.get('number')
         message=request.data.get('message')
-        serializer_contact=self.serializer_class(data={'fname':fname,'lname':lname,'email':email,'number':number,'message':message,})
+        serializer_contact=self.serializer_class(data={'fname':fname,'lname':lname,'email':email,'number':number,'message':message,'status':progress})
         print(serializer_contact)
         if(serializer_contact.is_valid()):
             serializer_contact.save()
@@ -154,11 +155,35 @@ class getsinglecontactView(GenericAPIView):
     
 
 class replyMessage(GenericAPIView):
-    def post(self,reguest):
-        message=reguest.data.get('Reply')
-        to_email=reguest.data.get('email')
-        sendmail(to_email,message)
-        return Response({'reply':message,'to_email':to_email, 'message':'success','success':True},status=status.HTTP_201_CREATED)
+    def post(self,request,id):
+        Reply=request.data.get('Reply')
+        to_email=request.data.get('email')
+        sendmail(to_email,Reply)
+        progress='1'
+        contact = contactus.objects.get(id=id)
+        contact.reply = Reply
+        contact.status = progress
+        contact.save()
+        serializer = contactserializers(contact)
+        # if serializer.is_valid():
+        return Response({'data': serializer.data,'message': 'success', 'success': True}, status=status.HTTP_201_CREATED)
+        # else:
+        #     return Response({'data':serializer.errors,'message':'failed','success':False},status=status.HTTP_400_BAD_REQUEST)
+
+class sortBasedStatus(GenericAPIView):
+    def post(self,request):
+        sort=contactus.objects.all().filter(status=0)
+        
+    
+
+    
+
+
+        
+        
+
+
+
 
         
     

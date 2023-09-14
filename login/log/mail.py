@@ -7,9 +7,14 @@ def sendmail(mail,data):
     HOST= "smtp-mail.outlook.com"
     PORT="587"
 
-    FROM_EMAIL="ashifvk@outlook.com"
+    # FROM_EMAIL="ashifvk@outlook.com"
+    # FROM_EMAIL="abhinandtk123@outlook.com"
+    # FROM_EMAIL="abhinandtk17@outlook.com"
+    FROM_EMAIL="ashifvk503@outlook.com"
     TO_EMAIL=mail
-    PASSWORD="Ashif123"
+    # PASSWORD="Ashif123"
+    PASSWORD="Ashifvk@123"
+    # PASSWORD="Abhinand.123"
 
     SUBJECT="FeedBack"
     BODY=data

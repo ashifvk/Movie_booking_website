@@ -13,6 +13,7 @@ urlpatterns = [
     path('contactusAPI',views.contactusAPI.as_view(),name='contactusAPI'),
     path('GetContactusDetails',views.GetContactusDetails.as_view(),name='GetContactusDetails'),
     path('getsinglecontactView/<int:id>',views.getsinglecontactView.as_view(),name='getsinglecontactView'),
-    path("replyMessage",views.replyMessage.as_view(),name='replyMessage'),
+    path("replyMessage/<int:id>",views.replyMessage.as_view(),name='replyMessage'),
+    # path("updatereplyStatus/<int:id>",views.updatereplyStatus.as_view(),name='updatereplyStatus'),
     
 ]
