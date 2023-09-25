@@ -15,8 +15,6 @@ urlpatterns = [
     path('getsinglecontactView/<int:id>',views.getsinglecontactView.as_view(),name='getsinglecontactView'),
     path("replyMessage/<int:id>",views.replyMessage.as_view(),name='replyMessage'),
     # path("updatereplyStatus/<int:id>",views.updatereplyStatus.as_view(),name='updatereplyStatus'),
-        path('SearchMovie/<char>',views.SearchMovie.as_view(),name='SearchMovie'),
-    # path('Update_product/<int:id>',views.Update_product.as_view(),name='Update_product'),
-
-    
+    path('SearchMovie/<char>',views.SearchMovie.as_view(),name='SearchMovie'),
+    path("MovieSearchAPIView",views.MovieSearchAPIView.as_view(),name='MovieSearchAPIView'),  
 ]

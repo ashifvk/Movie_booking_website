@@ -197,18 +197,18 @@ class SearchMovie(GenericAPIView):
 
 
 
-# class MovieSearchAPIView(GenericAPIView):
-#     def post(self, request):
-#         query = request.data.get('query')
-#         print(query)
+class MovieSearchAPIView(GenericAPIView):
+    def post(self, request):
+        query = request.data.get('query')
+        print(query)
 
-#         i = show.objects.filter(filmName__icontains=query) | show.objects.filter(directorName__icontains=query)
-#         for dta in i:
-#             print(dta)
+        i = show.objects.filter(filmName__icontains=query) | show.objects.filter(directorName__icontains=query)
+        for dta in i:
+            print(dta)
 
-#         data = [{'restaurentname': info.restaurentname, 'restaurentphone': info.restaurentphone, 'restaurentlocation': info.restaurentlocation, 'restaurentpin': info.restaurentpin,'restaurentrating': info.restaurentrating, 'restaurentcategory': info.restaurentcategory}
-#                 for info in i]
-#         return Response({'data': data, 'message': 'Successfully fetched', 'success': True}, status=status.HTTP_200_OK)
+        data = [{'image': info.image}
+                for info in i]
+        return Response({'data':data, 'message': 'Successfully fetched', 'success': True}, status=status.HTTP_200_OK)
 
 
 
