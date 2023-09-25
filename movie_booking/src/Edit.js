@@ -15,10 +15,20 @@ export default function Edit() {
     const inputChange = (event) => {
         const { name, value } = event.target
         setState({ ...state, [name]: value })
+console.log(state);
+
     }
    
     const update = () => {
-        axios.put(`http://127.0.0.1:8000/api/updateshow/${showid}`, state).then((response) => {
+        const data = new FormData()
+        data.append('image', state.image)
+        data.append('filmName', state.filmName)
+        data.append('star', state.star)
+        data.append('date', state.date)
+        data.append('directorName', state.directorName)
+        data.append('rating', state.rating)
+        console.log(data);
+        axios.put(`http://127.0.0.1:8000/api/updateshow/${showid}`, data).then((response) => {
             console.log(response);
             nav('/show')
         }).catch((error)=>{console.log(error);})
@@ -35,15 +45,25 @@ export default function Edit() {
             setGet(response.data.data[0])
         }).catch((error)=>{console.log(error);})
     }, []);
-    
-    console.log(get);
 
+    const imageGet = (event) => {
+        const image = event.target.files[0]
+        setState({ ...state, 'image': image })
+    }
+    
+    // console.log(get);
+console.log(state);
     return (
         <div className='main3'>
 
             <div class="container addcontainer">
                 <div class="row mt-3 addsec">
                     <form action="">
+                        
+                    <div class="form-group">
+                                <label>FilmImage</label>
+                                <input type="file" class="form-control" name="image" onChange={imageGet} ></input>
+                            </div>
 
                         <div class="form-group">
                             <label>FilmName</label>
@@ -77,7 +97,6 @@ export default function Edit() {
 
                         <input type="button" value='Back' class="b" onClick={back}></input>
                         <input type="button" value='submit' class="b ml-2" onClick={update}></input>
-                       
                     </form>
                 </div>
             </div>
