@@ -8,25 +8,31 @@ export default function Edit() {
 
     const { showid } = useParams()
     console.log(showid);
-
-    const [state, setState] = useState()
     const [get, setGet] = useState({})
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/api/getsingleShow/${showid}`).then((response) => {
+            console.log(response.data.data[0]);
+            setGet(response.data.data[0])
+        }).catch((error)=>{console.log(error);})
+    }, []);
+  
+   
 
     const inputChange = (event) => {
         const { name, value } = event.target
-        setState({ ...state, [name]: value })
-console.log(state);
+        setGet({ ...get, [name]: value })
+console.log(get);
 
     }
    
     const update = () => {
         const data = new FormData()
-        data.append('image', state.image)
-        data.append('filmName', state.filmName)
-        data.append('star', state.star)
-        data.append('date', state.date)
-        data.append('directorName', state.directorName)
-        data.append('rating', state.rating)
+        data.append('image', get.image)
+        data.append('filmName', get.filmName)
+        data.append('star', get.star)
+        data.append('date', get.date)
+        data.append('directorName', get.directorName)
+        data.append('rating', get.rating)
         console.log(data);
         axios.put(`http://127.0.0.1:8000/api/updateshow/${showid}`, data).then((response) => {
             console.log(response);
@@ -39,20 +45,14 @@ console.log(state);
     }
 
 
-    useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/getsingleShow/${showid}`).then((response) => {
-            console.log(response.data.data[0]);
-            setGet(response.data.data[0])
-        }).catch((error)=>{console.log(error);})
-    }, []);
+  
 
     const imageGet = (event) => {
         const image = event.target.files[0]
-        setState({ ...state, 'image': image })
+        setGet({ ...get, 'image': image })
     }
     
     // console.log(get);
-console.log(state);
     return (
         <div className='main3'>
 

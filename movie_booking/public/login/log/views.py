@@ -5,6 +5,8 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from .mail import sendmail
+from django.db.models import Q
+
 class registerApi(GenericAPIView):
 
     serializer_class=loginserializers
@@ -195,20 +197,18 @@ class SearchMovie(GenericAPIView):
 
 
 
-
-
 class MovieSearchAPIView(GenericAPIView):
     def post(self, request):
         query = request.data.get('query')
         print(query)
+        i=show.objects.filter(Q(filmName__icontains=query) | Q(directorName__icontains=query)).values()
+        # i = show.objects.filter(filmName__icontains=query) | show.objects.filter(directorName__icontains=query)
+        # for dta in i:
+        #     print(dta)
 
-        i = show.objects.filter(filmName__icontains=query) | show.objects.filter(directorName__icontains=query)
-        for dta in i:
-            print(dta)
-
-        data = [{'image': info.image}
-                for info in i]
-        return Response({'data':data, 'message': 'Successfully fetched', 'success': True}, status=status.HTTP_200_OK)
+        # data = [{'image': info.image}
+        #         for info in i]
+        return Response({'data':i, 'message': 'Successfully fetched', 'success': True}, status=status.HTTP_200_OK)
 
 
 
